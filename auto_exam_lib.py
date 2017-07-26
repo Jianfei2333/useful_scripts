@@ -9,8 +9,8 @@ browser = webdriver.Chrome('/usr/lib/chromium-browser/chromedriver')
 browser.get('http://202.116.65.85/sysulib/')
 cardNo = browser.find_element_by_id("cardNo")
 
-#Id = raw_input('请输入学生证号:')
-Id = "15336204"
+Id = raw_input('请输入学生证号:')
+#Id = "15336204"
 
 cardNo.send_keys(Id)
 submit = browser.find_element_by_id("submit1").click()
@@ -20,7 +20,9 @@ wait1 = WebDriverWait(browser, 10).until(
 )
 
 status = browser.find_element_by_id("QuestionTitle").get_attribute("alt")
-if status == "错误":
+#print(status)
+if status == None:
+    #print("flag")
     browser.quit()
 
 wait2 = WebDriverWait(browser, 10).until(
