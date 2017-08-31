@@ -4,13 +4,18 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import sys
 
 browser = webdriver.Chrome('/usr/lib/chromium-browser/chromedriver')
 browser.get('http://202.116.65.85/sysulib/')
 cardNo = browser.find_element_by_id("cardNo")
 
-Id = raw_input('请输入学生证号:')
-#Id = "15336204"
+if len(sys.argv) == 1:
+    Id = raw_input('请输入学生证号:')
+    #Id = "15336204"
+else:
+    Id = str(sys.argv[1])
+    #print (Id)
 
 cardNo.send_keys(Id)
 submit = browser.find_element_by_id("submit1").click()
@@ -24,6 +29,8 @@ status = browser.find_element_by_id("QuestionTitle").get_attribute("alt")
 if status == None:
     #print("flag")
     browser.quit()
+    print("不需要答题！")
+    exit()
 
 wait2 = WebDriverWait(browser, 10).until(
         EC.visibility_of_element_located((By.XPATH, "//input[@id = 'answer' and @value = '1']"))
