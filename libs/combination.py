@@ -44,7 +44,7 @@ def prime(l):
 def combination(n, r):
 	if r > n:
 		print 'ERROR! you cannot calculate combination C(n, r) with r > n !'
-		#return
+		return
 	if r > (n/2):
 		return combination(n, n-r)
 	elif r == 0:
